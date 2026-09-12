@@ -4,8 +4,8 @@
 
 | ID | Артефакт и цель | Инструмент / модель | Тип промпта | Запрос или ссылка на него | Результат или ссылка | Что приняли | Что отклонили или исправили | Как проверили |
 |---|---|---|---|---|---|---|---|---|
-| P1-01 | Baseline-ревью `TRAINING_PR.diff` |  | zero-shot |  |  |  |  |  |
-| P1-02 | Повторное ревью с master prompt |  | master prompt |  |  |  |  |  |
+| P1-01 | Baseline-ревью `TRAINING_PR.diff` | gpt-5 | zero-shot | Ниже diff учебного PR. Посмотри PR и найди проблемы. |[`zero_shot_response.md`](zero_shot_response.md) |  |  |  |
+| P1-02 | Повторное ревью с master prompt | gpt-5 | master prompt |  |  |  |  |  |
 | P1-03 |  |  |  |  |  |  |  |  |
 
 ## Master Prompt v1

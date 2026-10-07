@@ -1,0 +1,4 @@
+**Предпосылка вопроса неверна.** `unsubscribe` не реализован.
+
+- В `/home/tetrahp/Documents/ITMOv2/practices/practice_03/lab/demo/results/agent_q3.json` (строка 10) записано, что в модуле `service.py` есть только функция `subscribe`, а `unsubscribe` отсутствует.
+- Поиск по шаблону `**/unsubscribe*` вернул **0 файлов**.

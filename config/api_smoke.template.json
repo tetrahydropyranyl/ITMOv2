@@ -1,0 +1,17 @@
+{
+  "base_url": "http://localhost:8080",
+  "readiness": {
+    "path": "/health",
+    "expect_status": 200,
+    "timeout_sec": 30,
+    "interval_sec": 1.0
+  },
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/health",
+      "expect_status": 200,
+      "required_json_fields": ["status"]
+    }
+  ]
+}

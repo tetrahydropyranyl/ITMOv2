@@ -19,4 +19,34 @@
       }
     }
   }
+  ,
+  "skills": {
+    "paths": [
+      ".opencode/skills"
+    ]
+  },
+  "instructions": [
+    "AGENTS.md"
+  ],
+  "experimental": {
+    "primary_tools": ["edit", "bash"],
+    "mcp_timeout": 45000
+  }
+  
+  ,
+  "mcp": {
+    "repo-guard": {
+      "type": "local",
+      "enabled": true,
+      "command": [
+        "./.venv/bin/mcp",
+        "run",
+        "practices/practice_04/mcp/server.py"
+      ],
+      "environment": {
+        "REPO_ROOT": "."
+      }
+    }
+  }
+  
 }

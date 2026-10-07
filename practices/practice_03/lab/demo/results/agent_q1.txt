@@ -1,0 +1,9 @@
+Тесты запускаются командой `make test` (инструкция указана в файле [`README.md`](/home/tetrahp/Documents/ITMOv2/practices/practice_03/lab/demo/README.md), строка 6).
+
+Альтернативно можно запустить через Python прямо из файла [`test_service.py`](/home/tetrahp/Documents/ITMOv2/practices/practice_03/lab/demo/test_service.py):
+
+```bash
+python test_service.py
+# или с подробным выводом
+python -m unittest test_service
+```

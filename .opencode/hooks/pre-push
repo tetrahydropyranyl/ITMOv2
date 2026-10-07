@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Run API contract smoke before pushing. Blocks push on FAIL (exit code != 0).
+
+REPO_ROOT=$(git rev-parse --show-toplevel)
+SCRIPT="$REPO_ROOT/.opencode/scripts/api_contract_smoke.py"
+REPORT_DIR="$REPO_ROOT/.opencode/skills/api-contract-smoke/reports"
+REPORT="$REPORT_DIR/pre_push.md"
+
+# Resolve config path (generic, not tied to a specific app)
+# Priority:
+# 1) API_SMOKE_CONFIG env var
+# 2) config/api_smoke.json at repo root
+# 3) first JSON in .opencode/skills/api-contract-smoke/config excluding *template* and *example*
+
+CONFIG="${API_SMOKE_CONFIG:-}"
+if [[ -z "${CONFIG}" ]]; then
+  if [[ -f "$REPO_ROOT/config/api_smoke.json" ]]; then
+    CONFIG="$REPO_ROOT/config/api_smoke.json"
+  elif [[ -d "$REPO_ROOT/.opencode/skills/api-contract-smoke/config" ]]; then
+    # shellcheck disable=SC2012
+    cand=$(ls -1 "$REPO_ROOT/.opencode/skills/api-contract-smoke/config"/*.json 2>/dev/null | grep -viE '(template|example)' | head -n1 || true)
+    if [[ -n "$cand" ]]; then
+      CONFIG="$cand"
+    fi
+  fi
+fi
+
+if [[ ! -x "$SCRIPT" ]];
+then
+  chmod +x "$SCRIPT" 2>/dev/null || true
+fi
+
+mkdir -p "$REPORT_DIR"
+
+if [[ -z "${CONFIG}" || ! -f "$CONFIG" ]]; then
+  echo "[pre-push] No API smoke config found. Skipping."
+  echo "[pre-push] Provide config at config/api_smoke.json or set API_SMOKE_CONFIG."
+  exit 0
+fi
+
+echo "[pre-push] Running API contract smoke with config: $CONFIG"
+python3 "$SCRIPT" --config "$CONFIG" --report "$REPORT"
+status=$?
+
+if [[ $status -ne 0 ]]; then
+  echo "[pre-push] Smoke FAILED. See report: $REPORT"
+  exit $status
+fi
+
+echo "[pre-push] Smoke PASSED. Report: $REPORT"
+exit 0

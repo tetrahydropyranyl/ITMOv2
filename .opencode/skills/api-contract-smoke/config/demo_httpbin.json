@@ -1,0 +1,24 @@
+{
+  "base_url": "https://httpbin.org",
+  "readiness": {
+    "path": "/status/200",
+    "expect_status": 200,
+    "timeout_sec": 10,
+    "interval_sec": 0.5
+  },
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/status/200",
+      "expect_status": 200,
+      "expect_headers": {"content-type": "*"}
+    },
+    {
+      "method": "GET",
+      "path": "/json",
+      "expect_status": 200,
+      "expect_headers": {"content-type": "application/json"},
+      "required_json_fields": ["slideshow"]
+    }
+  ]
+}

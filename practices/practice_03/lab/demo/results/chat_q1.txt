@@ -1,0 +1,3 @@
+Файл-источник: `/home/tetrahp/Documents/ITMOv2/practices/practice_03/lab/demo/README.md`.
+
+Запуск тестов выполняется командой `make test`.
